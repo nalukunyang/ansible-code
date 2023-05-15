@@ -1,0 +1,21 @@
+---
+- name: Revison
+  hosts: qaserver
+  become: yes
+  ignore_errors: True
+  tasks:  
+    - name: installing packages
+      yum:
+        name: "{{item}}"
+        state: present
+      loop:
+           - git
+           - unzip
+           - httpd
+           - unzip
+           - wget
+  
+      when: ansible_os_family == "RedHat"
+
+
+
