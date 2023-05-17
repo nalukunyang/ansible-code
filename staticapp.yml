@@ -20,18 +20,21 @@
     - name: getting app content
       get_url:
           url: https://github.com/utrains/static-resume/archive/refs/heads/main.zip
-          dest: /tmp
+          dest: /tmp/main.zip
+          
+
     - name: unarchiving content
       unarchive:
-        src: /tmp/static-resume/archive/refs/heads/main.zip
-        dest: /tmp/
+        src: /tmp/main.zip
+        dest: /tmp
         remote_src: yes
-
+        
     - name: copy file to html
       copy:
-        src: /temp/static-resume-main/iportfolio/*
+        src: /tmp/static-resume-main/iPortfolio/
         dest: /var/www/html/
-
+        remote_src: yes
+        follow: yes
     - name: starting apache
       service: 
         name: httpd
